@@ -1,14 +1,19 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 import { Button } from 'antd';
 import './App.less';
+import { AuthContext, AuthProvider } from './firebase';
 
 const App: FC = (): ReactElement => {
-    console.log('error');
+    const { user } = useContext(AuthContext);
+    console.log(user);
+
     return (
-        <div className="app">
-            <h1>Hello, welcome to VidVote application</h1>
-            <Button type="primary">click me</Button>
-        </div>
+        <AuthProvider>
+            <div className="app">
+                <h1>Hello, welcome to VidVote application</h1>
+                <Button type="primary">click me</Button>
+            </div>
+        </AuthProvider>
     );
 };
 
