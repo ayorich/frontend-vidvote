@@ -124,12 +124,12 @@ const Signup: FC = (): ReactElement => {
             <div className="extras">
                 {isSignin ? (
                     <small>
-                        Don't have an account?{' '}
+                        {`Don't`} have an account?
                         <span onClick={setIsSignIn}>Sign Up</span>
                     </small>
                 ) : (
                     <small>
-                        Already have an account?{' '}
+                        Already have an account?
                         <span onClick={setIsSignIn}>Sign In</span>
                     </small>
                 )}
