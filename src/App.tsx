@@ -3,7 +3,7 @@ import { AuthContext, AuthProvider } from './firebase';
 import AuthPage from './pages/auth/Auth.page';
 import LandingPage from './pages/landing/Landing.page';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { AUTH, HOME } from './routes';
+import { HOME, SIGNIN, SIGNUP } from './routes';
 
 import './App.less';
 const App: FC = (): ReactElement => {
@@ -14,7 +14,8 @@ const App: FC = (): ReactElement => {
         <AuthProvider>
             <Router>
                 <Route exact path={HOME} component={LandingPage} />
-                <Route exact path={AUTH} component={AuthPage} />
+                <Route exact path={SIGNIN} component={AuthPage} />
+                <Route exact path={SIGNUP} component={AuthPage} />
             </Router>
         </AuthProvider>
     );

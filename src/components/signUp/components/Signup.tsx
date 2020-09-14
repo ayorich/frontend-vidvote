@@ -4,6 +4,7 @@ import React, {
     useState,
     FormEvent,
     useContext,
+    useEffect,
 } from 'react';
 import { Row, Col, Button, Alert, Spin, Typography } from 'antd';
 import { signupFormType } from '../types';
@@ -12,11 +13,17 @@ import { handlerEvent } from '../../input/types';
 import { Input } from '../../input';
 import { AuthContext } from '../../../firebase';
 import loginIcon from '../../../assets/loginIcon.svg';
+import { useHistory } from 'react-router-dom';
+import { SIGNUP } from '../../../routes';
 
 const { Title } = Typography;
 
 const Signup: FC = (): ReactElement => {
+    const {
+        location: { pathname },
+    } = useHistory();
     const { setUser } = useContext(AuthContext);
+
     const [formInputs, setFormInput] = useState<signupFormType>({
         email: '',
         password: '',
@@ -25,7 +32,12 @@ const Signup: FC = (): ReactElement => {
 
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
-    // const history = useHistory();
+
+    useEffect(() => {
+        if (pathname === SIGNUP) {
+            setIsSignin(false);
+        }
+    }, [pathname]);
 
     const onInputChange = (e: handlerEvent) => {
         const { name, value } = e.target;

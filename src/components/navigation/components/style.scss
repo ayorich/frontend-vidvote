@@ -1,0 +1,29 @@
+.logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(43, 41, 41, 0.2);
+    margin: 6px 24px 0;
+    float: left;
+}
+.menu {
+    .menu-1 {
+        margin-left: 30rem !important;
+        // float: right;
+    }
+}
+
+.btnItems {
+    border-bottom: 0px transparent #ffffff !important;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-item:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-submenu:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-item-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-submenu-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-item-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-submenu-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-item-selected,
+.ant-menu-horizontal:not(.ant-menu-dark) > .btnItems.ant-menu-submenu-selected {
+    color: #0c2b4d;
+    border-bottom: 0px solid #0c2b4d !important;
+}

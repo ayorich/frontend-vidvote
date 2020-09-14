@@ -1,4 +1,5 @@
 // CONSTANT VALUES FOR ROUTING
-export const AUTH = '/auth';
+export const SIGNUP = '/signup';
+export const SIGNIN = '/signin';
 export const HOME = '/';
 export const DASHBOARD = '/dashboard';
