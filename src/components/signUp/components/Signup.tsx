@@ -11,6 +11,7 @@ import { auth } from '../../../firebase';
 import { handlerEvent } from '../../input/types';
 import { Input } from '../../input';
 import { AuthContext } from '../../../firebase';
+import loginIcon from '../../../assets/loginIcon.svg';
 
 const { Title } = Typography;
 
@@ -62,8 +63,6 @@ const Signup: FC = (): ReactElement => {
                 password: '',
             });
             setLoading(false);
-
-            // history.push(`${EMAIL_NOTICE}?mode=confirmNotice&email=${email}`);
         } catch (error) {
             setLoading(false);
             setError(error.message);
@@ -72,6 +71,9 @@ const Signup: FC = (): ReactElement => {
 
     return (
         <form onSubmit={onFormSubmit} className="signup-form">
+            <Row justify="center">
+                <img src={loginIcon} alt="logo" />
+            </Row>
             <Row justify="center">
                 <Title level={3}>{isSignin ? 'Sign In' : 'Sign Up'}</Title>
             </Row>
