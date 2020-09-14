@@ -1,0 +1,13 @@
+.landing {
+    &__hero {
+        height: 350px;
+        background-image: linear-gradient(to right, #0c2b4d, #206bbb);
+        align-items: center;
+    }
+    &__title {
+        color: #ffffff !important;
+    }
+    &__video {
+        padding: 4rem;
+    }
+}
