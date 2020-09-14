@@ -1,12 +1,13 @@
 import React, { FC, ReactElement } from 'react';
-import './App.css';
+import { Button } from 'antd';
+import './App.less';
 
 const App: FC = (): ReactElement => {
     console.log('error');
     return (
         <div className="app">
             <h1>Hello, welcome to VidVote application</h1>
-            <button>click me</button>
+            <Button type="primary">click me</Button>
         </div>
     );
 };
