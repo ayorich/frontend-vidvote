@@ -1,15 +1,24 @@
 import React, { FC, ReactElement } from 'react';
-// import { Row, Col, Button, Alert, Spin, Typography } from 'antd';
+import { Col, Row, Typography } from 'antd';
+// import { HeaderBar } from '../../components/headerBar';
+import './style.scss';
+import { Link } from 'react-router-dom';
 
-// const { Title } = Typography;
+const { Title } = Typography;
 
-const Signup: FC = (): ReactElement => {
+const Landing: FC = (): ReactElement => {
     return (
-        <div className="extras">
-            <small>{`Don't`} have an account?</small>
-            <small>Already have an account?</small>
-        </div>
+        <>
+            <Row justify="center">
+                <Col>
+                    <Title level={2}>LANDING PAGE</Title>
+                    <Link to="/auth">
+                        <button>signin</button>
+                    </Link>
+                </Col>
+            </Row>
+        </>
     );
 };
 
-export default Signup;
+export default Landing;
