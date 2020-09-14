@@ -1,0 +1,14 @@
+.custom-input{
+    width: 100%;
+    label{
+        font-size: 18px;
+        width: 100%;
+        color: rgba(0,0,0,0.7);
+    }
+    input{
+        margin-top: 0.3rem;
+        border-radius: 0;
+        height: 43px;
+        width: 100%;
+    }
+}

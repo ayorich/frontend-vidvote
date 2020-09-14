@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Button } from 'antd';
-import './App.less';
 import { AuthContext, AuthProvider } from './firebase';
+import AuthPage from './pages/auth/Auth.page';
+import './App.less';
 
 const App: FC = (): ReactElement => {
     const { user } = useContext(AuthContext);
@@ -10,8 +10,7 @@ const App: FC = (): ReactElement => {
     return (
         <AuthProvider>
             <div className="app">
-                <h1>Hello, welcome to VidVote application</h1>
-                <Button type="primary">click me</Button>
+                <AuthPage />
             </div>
         </AuthProvider>
     );

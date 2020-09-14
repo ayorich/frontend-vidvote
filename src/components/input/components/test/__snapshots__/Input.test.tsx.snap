@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render Input component 1`] = `
+<DocumentFragment>
+  <div
+    class="custom-input"
+  >
+    <input
+      class="ant-input"
+      type="text"
+      value=""
+    />
+  </div>
+</DocumentFragment>
+`;
