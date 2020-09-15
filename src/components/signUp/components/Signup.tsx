@@ -48,7 +48,6 @@ const Signup: FC = (): ReactElement => {
     const setIsSignIn = () => setIsSignin(!isSignin);
     const onFormSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        console.log(formInputs);
         const { password, email } = formInputs;
         if (!password || !email) {
             /**@todo  you'll use yup to define validation schema*/
