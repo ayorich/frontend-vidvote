@@ -1,0 +1,59 @@
+.ant-modal-close-x {
+    display: none !important;
+}
+.action__modal {
+    text-align: center;
+    &--image {
+        img {
+            width: 100% !important;
+            height: 100%;
+        }
+    }
+    .ant-modal-body {
+        padding: 0px !important;
+        padding-bottom: 20px !important;
+    }
+    &--text {
+        margin: 10px 10px 5px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    &--title {
+        margin: 5px;
+    }
+    &--artist {
+        margin: 5px;
+    }
+    &--votes {
+        font-weight: 600;
+        font-size: 14px;
+        margin: 5px;
+        margin-top: 15px;
+    }
+    &--buymore {
+        margin: 10px;
+
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+            font-weight: bold;
+        }
+    }
+}
+.unit-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    .unit-value {
+        padding: 0 15px;
+        background-color: #f4f4f4;
+        border-radius: 5px;
+        h4 {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+        }
+    }
+}

@@ -14,13 +14,14 @@ import { Input } from '../../input';
 import { AuthContext } from '../../../firebase';
 import loginIcon from '../../../assets/loginIcon.svg';
 import { useHistory } from 'react-router-dom';
-import { SIGNUP } from '../../../routes';
+import { DASHBOARD, SIGNUP } from '../../../routes';
 
 const { Title } = Typography;
 
 const Signup: FC = (): ReactElement => {
     const {
         location: { pathname },
+        push,
     } = useHistory();
     const { setUser } = useContext(AuthContext);
 
@@ -75,6 +76,7 @@ const Signup: FC = (): ReactElement => {
                 password: '',
             });
             setLoading(false);
+            push(DASHBOARD);
         } catch (error) {
             setLoading(false);
             setError(error.message);
