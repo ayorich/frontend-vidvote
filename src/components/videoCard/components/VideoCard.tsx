@@ -1,12 +1,19 @@
 import React, { FC, ReactElement } from 'react';
-import { Card } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { Card, Divider } from 'antd';
 import { FieldTimeOutlined, StarFilled } from '@ant-design/icons';
+import { VIDEODETAILS } from '../../../routes';
 import './style.scss';
 
 // const { Meta } = Card;
 const VideoCard: FC = (): ReactElement => {
+    const { push } = useHistory();
+    const videoPlayerHandler = () => {
+        push(VIDEODETAILS);
+    };
     return (
         <Card
+            onClick={videoPlayerHandler}
             className="videoCard"
             hoverable
             cover={
@@ -23,6 +30,7 @@ const VideoCard: FC = (): ReactElement => {
                 <span className="videoCard__votes">
                     <StarFilled className="videoCard__icon" /> 12 votes
                 </span>
+                <Divider type="vertical" />
                 <span className="videoCard__mins">
                     <FieldTimeOutlined className="videoCard__icon" /> 2 mins ago
                 </span>

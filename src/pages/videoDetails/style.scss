@@ -1,0 +1,19 @@
+.video__detail {
+    padding-top: 50px;
+}
+.video__title {
+    margin: 20px 0px;
+}
+.video__action {
+    margin-right: 20px;
+    cursor: pointer;
+    &--text {
+        margin-left: 10px;
+    }
+}
+.video__description {
+    margin: 20px 0px;
+}
+.video__icon {
+    font-size: 18px;
+}
