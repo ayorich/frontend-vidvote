@@ -14,7 +14,7 @@ const VideoCard: FC = (): ReactElement => {
     return (
         <Card
             onClick={videoPlayerHandler}
-            className="videoCard"
+            className="videoCard "
             hoverable
             cover={
                 <img
@@ -23,6 +23,7 @@ const VideoCard: FC = (): ReactElement => {
                 />
             }
         >
+            {/* <div className="ant-card-body2"></div> */}
             <p className="videoCard__title">
                 <b>Europe Street beat</b>
             </p>
@@ -30,7 +31,7 @@ const VideoCard: FC = (): ReactElement => {
                 <span className="videoCard__votes">
                     <StarFilled className="videoCard__icon" /> 12 votes
                 </span>
-                <Divider type="vertical" />
+                <Divider type="vertical" className="videoCard__divider" />
                 <span className="videoCard__mins">
                     <FieldTimeOutlined className="videoCard__icon" /> 2 mins ago
                 </span>

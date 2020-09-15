@@ -1,7 +1,7 @@
 import { Button, Menu } from 'antd';
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { HOME, SIGNIN, SIGNUP, VIDEODETAILS } from '../../../routes';
+import { DASHBOARD, HOME, SIGNIN, SIGNUP, VIDEODETAILS } from '../../../routes';
 
 const Navigation: FC = (): ReactElement => {
     const [current, setCurrent] = useState(HOME);
@@ -32,8 +32,7 @@ const Navigation: FC = (): ReactElement => {
                 {pathname === VIDEODETAILS && (
                     <Menu.Item key={VIDEODETAILS}>Video Player</Menu.Item>
                 )}
-                <Menu.Item key="3">How it works</Menu.Item>
-                <Menu.Item key="4">My Votes</Menu.Item>
+                <Menu.Item key={DASHBOARD}>My Videos</Menu.Item>
                 <Menu.Item key={SIGNIN} className="btnItems">
                     <Button type="primary">Login</Button>
                 </Menu.Item>

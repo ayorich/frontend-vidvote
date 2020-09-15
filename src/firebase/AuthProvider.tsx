@@ -5,6 +5,7 @@ import { AuthContext } from './AuthContext';
 const AuthProvider: FC<ReactNode> = ({ children }): ReactElement => {
     const [user, setUser] = useState(null as firebase.User | null);
     const [loadingAuthState, setLoadingAuthState] = useState(true);
+    const [availableUnits, setAvailableUnits] = useState(1000);
 
     useEffect(() => {
         auth.onAuthStateChanged(async (user) => {
@@ -28,6 +29,8 @@ const AuthProvider: FC<ReactNode> = ({ children }): ReactElement => {
                 authenticated: user !== null,
                 setUser,
                 loadingAuthState,
+                availableUnits,
+                setAvailableUnits,
             }}
         >
             {children}

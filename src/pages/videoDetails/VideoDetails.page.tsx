@@ -1,14 +1,17 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import { Col, Divider, Row, Typography } from 'antd';
 import { Navigation } from '../../components/navigation';
 
-import './style.scss';
 import { ShareAltOutlined, StarOutlined } from '@ant-design/icons';
+import { ActionModal } from '../../components/actionModal';
+import './style.scss';
+
 const { Title } = Typography;
 
 const VideoDetails: FC = (): ReactElement => {
+    const [modalOpen, setModalOpen] = useState(false);
     const voteHandler = () => {
-        alert('vote modal shows');
+        setModalOpen(true);
     };
     return (
         <>
@@ -79,6 +82,10 @@ const VideoDetails: FC = (): ReactElement => {
                     </Col>
                 </Col>
             </Row>
+            <ActionModal
+                onActionComplete={() => setModalOpen(false)}
+                isOpen={modalOpen}
+            />
         </>
     );
 };
