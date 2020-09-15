@@ -17,6 +17,7 @@ import './style.scss';
 const ActionModal: FC<modalProps> = ({
     isOpen,
     onActionComplete,
+    title,
 }): ReactElement => {
     const { availableUnits, setAvailableUnits } = useContext(AuthContext);
     const [votes, setVotes] = useState(1);
@@ -68,7 +69,7 @@ const ActionModal: FC<modalProps> = ({
                 />
             </div>
             <p className="action__modal--text">Vote</p>
-            <p className="action__modal--title">{'"Fast and Furious"'}</p>
+            <p className="action__modal--title">{title}</p>
             <p className="action__modal--artist">John Cena</p>
             {availableUnits ? (
                 <>

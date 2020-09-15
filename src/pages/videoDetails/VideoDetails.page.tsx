@@ -5,6 +5,7 @@ import { Navigation } from '../../components/navigation';
 import { ShareAltOutlined, StarOutlined } from '@ant-design/icons';
 import { ActionModal } from '../../components/actionModal';
 import './style.scss';
+import { useHistory } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -13,6 +14,12 @@ const VideoDetails: FC = (): ReactElement => {
     const voteHandler = () => {
         setModalOpen(true);
     };
+    const {
+        location: { search },
+    } = useHistory();
+    const id = new URLSearchParams(search).get('id');
+    const title = new URLSearchParams(search).get('title');
+
     return (
         <>
             <Navigation />
@@ -21,7 +28,7 @@ const VideoDetails: FC = (): ReactElement => {
                     {/* <Row className="video__detail"> */}
                     <Col md={24} className="video__detail">
                         <iframe
-                            src="https://www.youtube.com/embed/_qyw6LC5pnE"
+                            src={`https://www.youtube.com/embed/${id}`}
                             height="400"
                             width="100%"
                             title="Iframe Example"
@@ -32,7 +39,7 @@ const VideoDetails: FC = (): ReactElement => {
 
                     <Col md={24}>
                         <Title level={3} className="video__title">
-                            Fast and Furious 10
+                            {title}
                         </Title>
                     </Col>
 
@@ -85,6 +92,7 @@ const VideoDetails: FC = (): ReactElement => {
             <ActionModal
                 onActionComplete={() => setModalOpen(false)}
                 isOpen={modalOpen}
+                title={title}
             />
         </>
     );
