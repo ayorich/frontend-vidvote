@@ -1,0 +1,45 @@
+.container {
+    margin: 35px 30px 25px 15px;
+    .text-guard {
+        font-weight: 600;
+        line-height: 20px;
+        text-align: right;
+        letter-spacing: 0.2px;
+        display: inline-block;
+        vertical-align: middle;
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+        .name {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 3px;
+            margin-top: 20px;
+            color: #a6acbe;
+        }
+        .title {
+            font-size: 14px;
+            display: block;
+            margin-top: 10px;
+        }
+        .avatar-btn {
+            margin-top: 15px;
+            color: #0c2b4d;
+        }
+    }
+    img {
+        height: 100%;
+        width: 100%;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        margin-left: 14px;
+        margin-right: 8px;
+        border: 2px solid #0c2b4d;
+        @media screen and (max-width: 768px) {
+            height: 40px;
+            width: 40px;
+        }
+    }
+}
