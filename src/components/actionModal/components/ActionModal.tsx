@@ -19,27 +19,27 @@ const ActionModal: FC<modalProps> = ({
     onActionComplete,
     title,
 }): ReactElement => {
-    const { availableUnits, setAvailableUnits } = useContext(AuthContext);
+    const { availablePoints, setAvailablePoints } = useContext(AuthContext);
     const [votes, setVotes] = useState(1);
     useEffect(() => {
         setVotes(1);
     }, [isOpen]);
 
     const addUnit = () => {
-        if (!availableUnits) return;
+        if (!availablePoints) return;
         setVotes(votes + 1);
     };
 
     const removeUnit = () => {
-        if (!availableUnits) return;
+        if (!availablePoints) return;
         if (votes === 1) return;
         setVotes(votes - 1);
     };
 
     const onConfirmVote = () => {
-        if (availableUnits) {
-            const remainingUnits = availableUnits - votes * 100;
-            setAvailableUnits(remainingUnits);
+        if (availablePoints) {
+            const remainingUnits = availablePoints - votes * 100;
+            setAvailablePoints(remainingUnits);
             onActionComplete();
             notification.success({
                 message: 'Successfully',
@@ -71,7 +71,7 @@ const ActionModal: FC<modalProps> = ({
             <p className="action__modal--text">Vote</p>
             <p className="action__modal--title">{title}</p>
             <p className="action__modal--artist">John Cena</p>
-            {availableUnits ? (
+            {availablePoints ? (
                 <>
                     <p className="action__modal--votes">Votes</p>
                     <div className="unit-control">
@@ -88,7 +88,7 @@ const ActionModal: FC<modalProps> = ({
                         </div>
                         <Tooltip title="add vote">
                             <Button
-                                disabled={votes * 100 === availableUnits}
+                                disabled={votes * 100 === availablePoints}
                                 onClick={addUnit}
                                 shape="circle"
                                 type="primary"
@@ -96,7 +96,7 @@ const ActionModal: FC<modalProps> = ({
                             />
                         </Tooltip>
                     </div>
-                    <p className="action__modal--units">{votes * 100} units</p>
+                    <p className="action__modal--units">{votes * 100} Points</p>
                 </>
             ) : (
                 <>
@@ -113,7 +113,7 @@ const ActionModal: FC<modalProps> = ({
             <Button
                 type="primary"
                 onClick={onConfirmVote}
-                disabled={!availableUnits}
+                disabled={!availablePoints}
             >
                 CONFIRM VOTE
             </Button>
