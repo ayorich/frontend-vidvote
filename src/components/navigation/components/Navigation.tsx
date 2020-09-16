@@ -52,7 +52,7 @@ const Navigation: FC = (): ReactElement => {
     }, [windowWidth]);
 
     const onSignOut = () => {
-        localStorage.clear();
+        // localStorage.clear();
         auth.signOut();
         setUser(null);
         //Re-direct landing page

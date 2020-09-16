@@ -1,21 +1,26 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { Col, Row, Typography } from 'antd';
+import { Col, Row, Spin, Typography } from 'antd';
 import { Navigation } from '../../components/navigation';
 import { Avatar } from '../../components/avatar';
 
 import { VideoCard } from '../../components/videoCard';
 import { Footer } from '../../components/footer';
 import { dataType } from './types';
+import { LoadingOutlined } from '@ant-design/icons';
 import './style.scss';
 
 const { Title } = Typography;
 
 const MyVideos: FC = (): ReactElement => {
     const [videoData, setVideoData] = useState<dataType[]>();
+    const [loading, setLoading]=useState(false)
 
+    
     //----localstorage---//
     useEffect(() => {
+        setLoading(true)
         const data = localStorage.getItem('data');
+
         //----localstorage---//
         if (data) {
             const parseData = JSON.parse(data);
@@ -23,6 +28,11 @@ const MyVideos: FC = (): ReactElement => {
             arrayData.push(...parseData);
             setVideoData(arrayData);
         }
+
+        setTimeout(()=>{
+            setLoading(false)
+
+        },1000)
     }, []);
     //----localstorage---//
 
@@ -38,15 +48,14 @@ const MyVideos: FC = (): ReactElement => {
             />
         </Col>
     ));
-
+const indicator=<LoadingOutlined style={{ fontSize : 40 }} spin />
     return (
         <>
             <Navigation />
             <Row justify="start">
                 <Avatar />
             </Row>
-
-            {videoData ? (
+            {!loading &&videoData ? (
                 <Row className="landing__video">{displayCard}</Row>
             ) : (
                 <Row
@@ -54,9 +63,9 @@ const MyVideos: FC = (): ReactElement => {
                     justify="center"
                     align="middle"
                 >
-                    <Col>
+                   {!loading ?<Col>
                         <Title>NO VIDEO VOTED YET</Title>
-                    </Col>
+                    </Col>: <Spin indicator={indicator} />}
                 </Row>
             )}
             <Footer />
