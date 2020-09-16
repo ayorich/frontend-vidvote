@@ -7,7 +7,9 @@ import React, {
     useContext,
     useEffect,
 } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../firebase';
+import { DASHBOARD } from '../../../routes';
 import { modalProps } from '../types';
 import './style.scss';
 
@@ -16,6 +18,7 @@ const ActionModal: FC<modalProps> = ({
     isOpen,
     onActionComplete,
     title,
+    id,
 }): ReactElement => {
     const { availablePoints, setAvailablePoints } = useContext(AuthContext);
     const [votes, setVotes] = useState(1);
@@ -23,19 +26,6 @@ const ActionModal: FC<modalProps> = ({
         setVotes(1);
     }, [isOpen]);
 
-    const buyMore = () => {
-        if (availablePoints) {
-            setAvailablePoints(availablePoints + 2000);
-        } else {
-            setAvailablePoints(2000);
-        }
-        notification.success({
-            message: 'Successful',
-            description:
-                'You Have Successfully Bought 2000 units worth ₦10,000. Happy Voting! ',
-            duration: 5,
-        });
-    };
     const addUnit = () => {
         if (!availablePoints) return;
         setVotes(votes + 1);
@@ -51,6 +41,26 @@ const ActionModal: FC<modalProps> = ({
         if (availablePoints) {
             const remainingUnits = availablePoints - votes * 100;
             setAvailablePoints(remainingUnits);
+
+            //----localstorage---//
+            const oldData = localStorage.getItem('data');
+
+            const arrayData: any[] = [];
+            if (oldData) {
+                const parseData = JSON.parse(oldData);
+
+                arrayData.push(...parseData);
+            }
+            const data = {
+                name: title,
+                urlID: id,
+            };
+
+            arrayData.push(data);
+
+            localStorage.setItem('data', JSON.stringify(arrayData));
+            //-----localstorage----//
+
             onActionComplete();
             notification.success({
                 message: 'Successfully',
@@ -76,7 +86,7 @@ const ActionModal: FC<modalProps> = ({
             <div className="action__modal--image">
                 <img
                     alt="example"
-                    src="https://img.youtube.com/vi/2Xmibe4YhpQ/mqdefault.jpg"
+                    src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
                 />
             </div>
             <p className="action__modal--text">Vote</p>
@@ -116,13 +126,12 @@ const ActionModal: FC<modalProps> = ({
                     </p>
                     <p className="action__modal--buymore">
                         <span>Please </span>
-                        <span
-                            onClick={buyMore}
+                        <Link
+                            to={DASHBOARD}
                             className="action__modal--buymore-btn"
                         >
-                            {' '}
-                            PURCHASE{' '}
-                        </span>
+                            PURCHASE
+                        </Link>
                         <span> more units</span>
                     </p>
                 </>
