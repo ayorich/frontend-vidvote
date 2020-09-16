@@ -3,4 +3,5 @@ export type videoCardProps = {
     title: string;
     votes: string;
     time: string;
+    votedTab?: boolean;
 };

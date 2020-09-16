@@ -1,21 +1,17 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { Col, Row } from 'antd';
+import { Col, Row, Typography } from 'antd';
 import { Navigation } from '../../components/navigation';
 import { Avatar } from '../../components/avatar';
 
 import { VideoCard } from '../../components/videoCard';
 import { Footer } from '../../components/footer';
+import { dataType } from './types';
 import './style.scss';
 
-// const { Title } = Typography;
+const { Title } = Typography;
 
 const MyVideos: FC = (): ReactElement => {
-    const [videoData, setVideoData] = useState([
-        {
-            name: 'Top Upcoming Videos',
-            urlID: 'zr9E5-k4oug',
-        },
-    ]);
+    const [videoData, setVideoData] = useState<dataType[]>();
 
     //----localstorage---//
     useEffect(() => {
@@ -30,7 +26,7 @@ const MyVideos: FC = (): ReactElement => {
     }, []);
     //----localstorage---//
 
-    const displayCard = videoData.map(({ name, urlID }, i) => (
+    const displayCard = videoData?.map(({ name, urlID }, i) => (
         <Col xs={24} md={8} key={i}>
             <VideoCard
                 key={i}
@@ -38,6 +34,7 @@ const MyVideos: FC = (): ReactElement => {
                 title={name}
                 votes="27"
                 time="12"
+                votedTab
             />
         </Col>
     ));
@@ -49,7 +46,19 @@ const MyVideos: FC = (): ReactElement => {
                 <Avatar />
             </Row>
 
-            <Row className="landing__video">{displayCard}</Row>
+            {videoData ? (
+                <Row className="landing__video">{displayCard}</Row>
+            ) : (
+                <Row
+                    style={{ height: '400px' }}
+                    justify="center"
+                    align="middle"
+                >
+                    <Col>
+                        <Title>NO VIDEO VOTED YET</Title>
+                    </Col>
+                </Row>
+            )}
             <Footer />
         </>
     );
