@@ -7,9 +7,7 @@ import React, {
     useContext,
     useEffect,
 } from 'react';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../firebase';
-import { BUYMORE } from '../../../routes';
 import { modalProps } from '../types';
 import './style.scss';
 
@@ -25,6 +23,19 @@ const ActionModal: FC<modalProps> = ({
         setVotes(1);
     }, [isOpen]);
 
+    const buyMore = () => {
+        if (availablePoints) {
+            setAvailablePoints(availablePoints + 2000);
+        } else {
+            setAvailablePoints(2000);
+        }
+        notification.success({
+            message: 'Successful',
+            description:
+                'You Have Successfully Bought 2000 units worth ₦10,000. Happy Voting! ',
+            duration: 5,
+        });
+    };
     const addUnit = () => {
         if (!availablePoints) return;
         setVotes(votes + 1);
@@ -105,7 +116,13 @@ const ActionModal: FC<modalProps> = ({
                     </p>
                     <p className="action__modal--buymore">
                         <span>Please </span>
-                        <Link to={BUYMORE}> PURCHASE </Link>
+                        <span
+                            onClick={buyMore}
+                            className="action__modal--buymore-btn"
+                        >
+                            {' '}
+                            PURCHASE{' '}
+                        </span>
                         <span> more units</span>
                     </p>
                 </>

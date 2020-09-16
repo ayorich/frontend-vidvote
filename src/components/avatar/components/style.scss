@@ -1,5 +1,8 @@
 .container {
     margin: 35px 30px 25px 15px;
+    @media screen and (max-width: 768px) {
+        margin-top: 20px;
+    }
     .text-guard {
         font-weight: 600;
         line-height: 20px;
@@ -9,7 +12,10 @@
         vertical-align: middle;
 
         @media screen and (max-width: 768px) {
-            display: none;
+            line-height: 16px;
+            font-size: 14px;
+            text-align: left;
+            margin-left: 5px;
         }
         .name {
             font-size: 16px;
@@ -26,6 +32,9 @@
         .avatar-btn {
             margin-top: 15px;
             color: #0c2b4d;
+            @media screen and (max-width: 768px) {
+                margin-top: 5px;
+            }
         }
     }
     img {
@@ -38,8 +47,8 @@
         margin-right: 8px;
         border: 2px solid #0c2b4d;
         @media screen and (max-width: 768px) {
-            height: 40px;
-            width: 40px;
+            height: 60px;
+            width: 60px;
         }
     }
 }
