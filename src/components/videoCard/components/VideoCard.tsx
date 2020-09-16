@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Card, Divider } from 'antd';
+import { Card, Divider, Tag } from 'antd';
 import { FieldTimeOutlined, StarFilled } from '@ant-design/icons';
 import { VIDEODETAILS } from '../../../routes';
 import './style.scss';
@@ -12,6 +12,7 @@ const VideoCard: FC<videoCardProps> = ({
     title,
     votes,
     time,
+    votedTab,
 }): ReactElement => {
     const { push } = useHistory();
     const id = source.split('/')[4];
@@ -30,14 +31,24 @@ const VideoCard: FC<videoCardProps> = ({
                 <b>{title}</b>
             </p>
             <div className="videoCard__detail">
-                <span className="videoCard__votes">
-                    <StarFilled className="videoCard__icon" /> {votes} votes
-                </span>
-                <Divider type="vertical" className="videoCard__divider" />
-                <span className="videoCard__mins">
-                    <FieldTimeOutlined className="videoCard__icon" /> {time}{' '}
-                    mins
-                </span>
+                {!votedTab ? (
+                    <>
+                        <span className="videoCard__votes">
+                            <StarFilled className="videoCard__icon" /> {votes}{' '}
+                            votes
+                        </span>
+                        <Divider
+                            type="vertical"
+                            className="videoCard__divider"
+                        />
+                        <span className="videoCard__mins">
+                            <FieldTimeOutlined className="videoCard__icon" />{' '}
+                            {time} mins
+                        </span>
+                    </>
+                ) : (
+                    <Tag color="geekblue">VOTED</Tag>
+                )}
             </div>
         </Card>
     );
