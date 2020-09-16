@@ -24,9 +24,8 @@ const VideoDetails: FC = (): ReactElement => {
         <>
             <Navigation />
             <Row justify="center">
-                <Col md={12}>
-                    {/* <Row className="video__detail"> */}
-                    <Col md={24} className="video__detail">
+                <Col xs={20} md={18} lg={12}>
+                    <div className="video__detail">
                         <iframe
                             src={`https://www.youtube.com/embed/${id}`}
                             height="400"
@@ -35,58 +34,50 @@ const VideoDetails: FC = (): ReactElement => {
                             frameBorder="0"
                             allowFullScreen
                         ></iframe>
-                    </Col>
+                    </div>
 
-                    <Col md={24}>
-                        <Title level={3} className="video__title">
-                            {title}
-                        </Title>
-                    </Col>
+                    <Title level={3} className="video__title">
+                        {title}
+                    </Title>
 
-                    <Col md={24}>
-                        <Row justify="space-between">
-                            <Col md={8}>
-                                <span>123 Votes</span>
-                                <Divider type="vertical" />
-                                <span>{new Date().toDateString()}</span>
-                            </Col>
-                            <Col md={8}>
-                                <Row justify="end">
-                                    <span
-                                        className="video__action"
-                                        onClick={voteHandler}
-                                    >
-                                        <StarOutlined className="video__icon" />
-                                        <span className="video__action--text">
-                                            Vote
-                                        </span>
+                    <Row justify="space-between">
+                        <Col md={12} lg={12}>
+                            <span>123 Votes</span>
+                            <Divider type="vertical" />
+                            <span>{new Date().toDateString()}</span>
+                        </Col>
+                        <Col md={8}>
+                            <Row justify="end">
+                                <span
+                                    className="video__action"
+                                    onClick={voteHandler}
+                                >
+                                    <StarOutlined className="video__icon" />
+                                    <span className="video__action--text">
+                                        Vote
                                     </span>
-                                    <span className="video__action">
-                                        <ShareAltOutlined className="video__icon" />
-                                        <span className="video__action--text">
-                                            Share
-                                        </span>
+                                </span>
+                                <span className="video__action">
+                                    <ShareAltOutlined className="video__icon" />
+                                    <span className="video__action--text">
+                                        Share
                                     </span>
-                                </Row>
-                            </Col>
-                        </Row>
-                    </Col>
+                                </span>
+                            </Row>
+                        </Col>
+                    </Row>
 
-                    <Col md={24}>
-                        <Divider />
-                    </Col>
+                    <Divider />
 
-                    <Col md={24}>
-                        <Title level={5}>Description</Title>
-                    </Col>
-                    <Col md={24} className="video__description">
+                    <Title level={5}>Description</Title>
+                    <div className="video__description">
                         <span>
                             Here is a sample video for sample purpose and the
                             description goes here. Hane a nice day ahead. Here
                             is a sample video for sample purpose and the
                             description goes here. Hane a nice day ahead.
                         </span>
-                    </Col>
+                    </div>
                 </Col>
             </Row>
             <ActionModal

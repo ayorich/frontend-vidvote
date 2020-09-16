@@ -6,6 +6,20 @@
 //     margin-right: 40rem;
 //     float: left;
 // }
+.hamburger-menu {
+    font-size: 35px;
+    margin: 20px;
+}
+.menumodal {
+    padding: 40px;
+    cursor: pointer;
+    height: 70vh;
+
+    & > div > div {
+        margin: 10px;
+        font-size: 18px;
+    }
+}
 .menu {
     display: flex !important;
     // justify-content: space-between !important;

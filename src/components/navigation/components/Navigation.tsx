@@ -1,4 +1,4 @@
-import { Button, Menu } from 'antd';
+import { Button, Col, Menu, Row } from 'antd';
 import React, {
     FC,
     ReactElement,
@@ -9,11 +9,18 @@ import React, {
 import { useHistory } from 'react-router-dom';
 import { auth, AuthContext } from '../../../firebase';
 import { DASHBOARD, HOME, SIGNIN, SIGNUP, VIDEODETAILS } from '../../../routes';
+import { useWindowWidth } from '@react-hook/window-size';
 import logoImage from '../../../assets/logo.png';
+import { MenuUnfoldOutlined } from '@ant-design/icons';
+import MenuModal from './MenuModal';
 
 const Navigation: FC = (): ReactElement => {
     const { setUser, authenticated } = useContext(AuthContext);
     const [current, setCurrent] = useState(HOME);
+    const windowWidth = useWindowWidth();
+    const [isMobile, setIsMobile] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
+
     const {
         push,
         location: { pathname },
@@ -23,9 +30,28 @@ const Navigation: FC = (): ReactElement => {
         if (e.key === 'SIGNOUT') return;
         push(e.key);
     };
+
+    const onToggle = () => {
+        setShowMenu(!showMenu);
+    };
+
+    const onMenuClick = (key: string) => {
+        onToggle();
+        console.log(key);
+        push(key);
+    };
     useEffect(() => {
         setCurrent(pathname);
     }, [pathname]);
+
+    useEffect(() => {
+        if (windowWidth <= 768) {
+            setIsMobile(true);
+        } else {
+            setIsMobile(false);
+        }
+    }, [windowWidth]);
+
     const onSignOut = () => {
         localStorage.clear();
         auth.signOut();
@@ -36,41 +62,58 @@ const Navigation: FC = (): ReactElement => {
 
     return (
         <>
-            <Menu
-                onClick={handleClick}
-                selectedKeys={[current]}
-                mode="horizontal"
-                className="menu"
-            >
-                {/* <div className="logo" /> */}
-                <div className="menu__logo">
-                    <img src={logoImage} alt="profile" />
-                </div>
-                <Menu.Item key={HOME}>Home</Menu.Item>
-                {pathname === VIDEODETAILS && (
-                    <Menu.Item key={VIDEODETAILS}>Video Player</Menu.Item>
-                )}
+            {!isMobile ? (
+                <Menu
+                    onClick={handleClick}
+                    selectedKeys={[current]}
+                    mode="horizontal"
+                    className="menu"
+                >
+                    {/* <div className="logo" /> */}
+                    <div className="menu__logo">
+                        <img src={logoImage} alt="profile" />
+                    </div>
+                    <Menu.Item key={HOME}>Home</Menu.Item>
+                    {pathname === VIDEODETAILS && (
+                        <Menu.Item key={VIDEODETAILS}>Video Player</Menu.Item>
+                    )}
 
-                <Menu.Item key={DASHBOARD}>My Videos</Menu.Item>
-                {!authenticated ? (
-                    <>
-                        <Menu.Item key={SIGNIN} className="btnItems">
-                            <Button type="primary">Login</Button>
+                    <Menu.Item key={DASHBOARD}>My Videos</Menu.Item>
+                    {!authenticated ? (
+                        <>
+                            <Menu.Item key={SIGNIN} className="btnItems">
+                                <Button type="primary">Login</Button>
+                            </Menu.Item>
+                            <Menu.Item key={SIGNUP} className="btnItems">
+                                <Button>Register</Button>
+                            </Menu.Item>
+                        </>
+                    ) : (
+                        <Menu.Item
+                            onClick={onSignOut}
+                            key="SIGNOUT"
+                            className="btnItems"
+                        >
+                            <Button>Log Out</Button>
                         </Menu.Item>
-                        <Menu.Item key={SIGNUP} className="btnItems">
-                            <Button>Register</Button>
-                        </Menu.Item>
-                    </>
-                ) : (
-                    <Menu.Item
-                        onClick={onSignOut}
-                        key="SIGNOUT"
-                        className="btnItems"
-                    >
-                        <Button>Log Out</Button>
-                    </Menu.Item>
-                )}
-            </Menu>
+                    )}
+                </Menu>
+            ) : (
+                <Row justify="end">
+                    <Col>
+                        <MenuUnfoldOutlined
+                            onClick={onToggle}
+                            className="hamburger-menu"
+                        />
+                    </Col>
+                </Row>
+            )}
+            <MenuModal
+                isOpen={showMenu}
+                onActionComplete={onToggle}
+                onClick={onMenuClick}
+                onSignOut={onSignOut}
+            />
         </>
     );
 };

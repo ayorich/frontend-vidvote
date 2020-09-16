@@ -32,11 +32,16 @@
     }
     &--buymore {
         margin: 10px;
-
-        a {
+        &-btn {
+            cursor: pointer;
+            font-weight: bold;
+            color: #0c2b4d;
             &:hover {
                 text-decoration: underline;
             }
+        }
+
+        a {
             font-weight: bold;
         }
     }

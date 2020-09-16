@@ -10,4 +10,15 @@
     &__video {
         padding: 4rem;
     }
+    @media screen and (max-width: 768px) {
+        &__video {
+            padding: 0rem;
+        }
+        &__title {
+            font-size: 18px !important;
+        }
+        &__hero {
+            height: 200px;
+        }
+    }
 }
