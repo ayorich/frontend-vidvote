@@ -2,6 +2,8 @@ import React, { FC, ReactElement } from 'react';
 import { Col, Row, Typography } from 'antd';
 import { Navigation } from '../../components/navigation';
 import { VideoCard } from '../../components/videoCard';
+import { Footer } from '../../components/footer';
+
 import './style.scss';
 // import { Link } from 'react-router-dom';
 
@@ -73,6 +75,7 @@ const Landing: FC = (): ReactElement => {
                     />
                 </Col>
             </Row>
+            <Footer />
         </>
     );
 };

@@ -37,7 +37,6 @@ const Navigation: FC = (): ReactElement => {
 
     const onMenuClick = (key: string) => {
         onToggle();
-        console.log(key);
         push(key);
     };
     useEffect(() => {

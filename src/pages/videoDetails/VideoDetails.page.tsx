@@ -4,8 +4,10 @@ import { Navigation } from '../../components/navigation';
 
 import { ShareAltOutlined, StarOutlined } from '@ant-design/icons';
 import { ActionModal } from '../../components/actionModal';
-import './style.scss';
 import { useHistory } from 'react-router-dom';
+import { Footer } from '../../components/footer';
+
+import './style.scss';
 
 const { Title } = Typography;
 
@@ -23,7 +25,7 @@ const VideoDetails: FC = (): ReactElement => {
     return (
         <>
             <Navigation />
-            <Row justify="center">
+            <Row justify="center" className="videodetails">
                 <Col xs={20} md={18} lg={12}>
                     <div className="video__detail">
                         <iframe
@@ -84,7 +86,9 @@ const VideoDetails: FC = (): ReactElement => {
                 onActionComplete={() => setModalOpen(false)}
                 isOpen={modalOpen}
                 title={title}
+                id={id}
             />
+            <Footer />
         </>
     );
 };
