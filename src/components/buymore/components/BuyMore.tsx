@@ -5,37 +5,37 @@ import { AuthContext } from '../../../firebase';
 
 const BuyMore: FC = (): ReactElement => {
     const { availablePoints, setAvailablePoints } = useContext(AuthContext);
-    const buyMore = (amount: number) => {
+    const buyMore = (units: number) => {
         if (availablePoints) {
-            setAvailablePoints(availablePoints + amount);
+            setAvailablePoints(availablePoints + units);
         } else {
-            setAvailablePoints(amount);
+            setAvailablePoints(units);
         }
         notification.success({
             message: 'Successful',
             description: `You Have Successfully Bought ${
-                amount / 100
-            } units worth ₦${amount.toLocaleString()}. Happy Voting! `,
+                units
+            } units worth ₦${(units*100).toLocaleString()}. Happy Voting! `,
             duration: 5,
         });
     };
     const options = (
         <Menu>
             <Menu.Item key="0">
-                <span onClick={() => buyMore(100000)}>
+                <span onClick={() => buyMore(1000)}>
                     1,000units = ₦100,000
                 </span>
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item key="1">
-                <span onClick={() => buyMore(150000)}>
+                <span onClick={() => buyMore(1500)}>
                     1,500units = ₦150,000
                 </span>
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item key="3">
-                <span onClick={() => buyMore(200000)}>
-                    2,000units = ₦2000,000
+                <span onClick={() => buyMore(2000)}>
+                    2,000units = ₦200,000
                 </span>
             </Menu.Item>
         </Menu>
