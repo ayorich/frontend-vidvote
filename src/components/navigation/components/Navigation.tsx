@@ -77,7 +77,9 @@ const Navigation: FC = (): ReactElement => {
                         <Menu.Item key={VIDEODETAILS}>Video Player</Menu.Item>
                     )}
 
-                    <Menu.Item key={DASHBOARD}>My Videos</Menu.Item>
+                    {authenticated && (
+                        <Menu.Item key={DASHBOARD}>My Videos</Menu.Item>
+                    )}
                     {!authenticated ? (
                         <>
                             <Menu.Item key={SIGNIN} className="btnItems">
