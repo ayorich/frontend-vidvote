@@ -21,7 +21,7 @@ const { Title } = Typography;
 const MyVideos: FC = (): ReactElement => {
     const { user } = useContext(AuthContext);
 
-    const [videoData, setVideoData] = useState<dataType[]>();
+    const [videoData, setVideoData] = useState<dataType[]>([]);
     const [loading, setLoading] = useState(false);
 
     //----localstorage---//
@@ -38,6 +38,8 @@ const MyVideos: FC = (): ReactElement => {
             const userData = arrayData.filter((key) => {
                 return key.uid === user?.uid;
             });
+            // console.log(userData);
+
             setVideoData(userData);
         }
 
@@ -67,6 +69,13 @@ const MyVideos: FC = (): ReactElement => {
             <Row justify="start">
                 <Avatar />
             </Row>
+            <Row justify="center" align="middle">
+                {videoData?.length === 0 && !loading && (
+                    <Title style={{ marginTop: '70px' }}>
+                        NO VIDEO VOTED YET
+                    </Title>
+                )}
+            </Row>
             {!loading && videoData ? (
                 <Row className="landing__video2">{displayCard}</Row>
             ) : (
@@ -75,13 +84,7 @@ const MyVideos: FC = (): ReactElement => {
                     justify="center"
                     align="middle"
                 >
-                    {!loading ? (
-                        <Col>
-                            <Title>NO VIDEO VOTED YET</Title>
-                        </Col>
-                    ) : (
-                        <Spin indicator={indicator} />
-                    )}
+                    {loading && <Spin indicator={indicator} />}
                 </Row>
             )}
             <Footer />
