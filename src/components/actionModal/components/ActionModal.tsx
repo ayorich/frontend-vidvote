@@ -20,7 +20,9 @@ const ActionModal: FC<modalProps> = ({
     title,
     id,
 }): ReactElement => {
-    const { availablePoints, setAvailablePoints } = useContext(AuthContext);
+    const { availablePoints, setAvailablePoints, user } = useContext(
+        AuthContext,
+    );
     const [votes, setVotes] = useState(1);
     useEffect(() => {
         setVotes(1);
@@ -54,6 +56,7 @@ const ActionModal: FC<modalProps> = ({
             const data = {
                 name: title,
                 urlID: id,
+                uid: user?.uid,
             };
 
             arrayData.push(data);

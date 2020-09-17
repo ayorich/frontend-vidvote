@@ -1,4 +1,10 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
+import React, {
+    FC,
+    ReactElement,
+    useContext,
+    useEffect,
+    useState,
+} from 'react';
 import { Col, Row, Spin, Typography } from 'antd';
 import { Navigation } from '../../components/navigation';
 import { Avatar } from '../../components/avatar';
@@ -8,17 +14,19 @@ import { Footer } from '../../components/footer';
 import { dataType } from './types';
 import { LoadingOutlined } from '@ant-design/icons';
 import './style.scss';
+import { AuthContext } from '../../firebase';
 
 const { Title } = Typography;
 
 const MyVideos: FC = (): ReactElement => {
-    const [videoData, setVideoData] = useState<dataType[]>();
-    const [loading, setLoading]=useState(false)
+    const { user } = useContext(AuthContext);
 
-    
+    const [videoData, setVideoData] = useState<dataType[]>();
+    const [loading, setLoading] = useState(false);
+
     //----localstorage---//
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         const data = localStorage.getItem('data');
 
         //----localstorage---//
@@ -26,14 +34,18 @@ const MyVideos: FC = (): ReactElement => {
             const parseData = JSON.parse(data);
             const arrayData = [];
             arrayData.push(...parseData);
-            setVideoData(arrayData);
+
+            const userData = arrayData.filter((key) => {
+                return key.uid === user?.uid;
+            });
+            setVideoData(userData);
         }
 
-        setTimeout(()=>{
-            setLoading(false)
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+    }, [user]);
 
-        },1000)
-    }, []);
     //----localstorage---//
 
     const displayCard = videoData?.map(({ name, urlID }, i) => (
@@ -48,24 +60,28 @@ const MyVideos: FC = (): ReactElement => {
             />
         </Col>
     ));
-const indicator=<LoadingOutlined style={{ fontSize : 40 }} spin />
+    const indicator = <LoadingOutlined style={{ fontSize: 40 }} spin />;
     return (
         <>
             <Navigation />
             <Row justify="start">
                 <Avatar />
             </Row>
-            {!loading &&videoData ? (
-                <Row className="landing__video">{displayCard}</Row>
+            {!loading && videoData ? (
+                <Row className="landing__video2">{displayCard}</Row>
             ) : (
                 <Row
                     style={{ height: '400px' }}
                     justify="center"
                     align="middle"
                 >
-                   {!loading ?<Col>
-                        <Title>NO VIDEO VOTED YET</Title>
-                    </Col>: <Spin indicator={indicator} />}
+                    {!loading ? (
+                        <Col>
+                            <Title>NO VIDEO VOTED YET</Title>
+                        </Col>
+                    ) : (
+                        <Spin indicator={indicator} />
+                    )}
                 </Row>
             )}
             <Footer />
