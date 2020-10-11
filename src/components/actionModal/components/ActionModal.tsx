@@ -19,6 +19,7 @@ const ActionModal: FC<modalProps> = ({
     onActionComplete,
     title,
     id,
+    source
 }): ReactElement => {
     const { availablePoints, setAvailablePoints, user } = useContext(
         AuthContext,
@@ -57,6 +58,7 @@ const ActionModal: FC<modalProps> = ({
                 name: title,
                 urlID: id,
                 uid: user?.uid,
+                source: source
             };
 
             arrayData.push(data);
@@ -87,10 +89,18 @@ const ActionModal: FC<modalProps> = ({
             className="action__modal"
         >
             <div className="action__modal--image">
-                <img
-                    alt="example"
-                    src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
-                />
+                {source ?
+                    <img
+                        alt="example"
+                        src={source}
+                        className="inner-img"
+                    />
+                    :
+                    <img
+                        alt="example"
+                        src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
+                    />
+                }
             </div>
             <p className="action__modal--text">Vote</p>
             <p className="action__modal--title">{title}</p>
@@ -123,22 +133,22 @@ const ActionModal: FC<modalProps> = ({
                     <p className="action__modal--units">{votes * 100} Points</p>
                 </>
             ) : (
-                <>
-                    <p className="action__modal--buymore">
-                        NO AVAILABLE UNITS TO MAKE A VOTE.
+                    <>
+                        <p className="action__modal--buymore">
+                            NO AVAILABLE UNITS TO MAKE A VOTE.
                     </p>
-                    <p className="action__modal--buymore">
-                        <span>Please </span>
-                        <Link
-                            to={DASHBOARD}
-                            className="action__modal--buymore-btn"
-                        >
-                            PURCHASE
+                        <p className="action__modal--buymore">
+                            <span>Please </span>
+                            <Link
+                                to={DASHBOARD}
+                                className="action__modal--buymore-btn"
+                            >
+                                PURCHASE
                         </Link>
-                        <span> more units</span>
-                    </p>
-                </>
-            )}
+                            <span> more units</span>
+                        </p>
+                    </>
+                )}
             <Button
                 type="primary"
                 onClick={onConfirmVote}

@@ -20,6 +20,7 @@ const VideoDetails: FC = (): ReactElement => {
         location: { search },
     } = useHistory();
     const id = new URLSearchParams(search).get('id');
+    const source = new URLSearchParams(search).get('source') as string;
     const title = new URLSearchParams(search).get('title');
 
     return (
@@ -28,14 +29,22 @@ const VideoDetails: FC = (): ReactElement => {
             <Row justify="center" className="videodetails">
                 <Col xs={20} md={18} lg={12}>
                     <div className="video__detail">
-                        <iframe
-                            src={`https://www.youtube.com/embed/${id}`}
-                            height="400"
-                            width="100%"
-                            title="Iframe Example"
-                            frameBorder="0"
-                            allowFullScreen
-                        ></iframe>
+                        {source ?
+                            <div className="video__img">
+
+                                <img src={source} alt=" project" />
+                            </div>
+
+                            :
+                            <iframe
+                                src={`https://www.youtube.com/embed/${id}`}
+                                height="400"
+                                width="100%"
+                                title="Iframe Example"
+                                frameBorder="0"
+                                allowFullScreen
+                            ></iframe>
+                        }
                     </div>
 
                     <Title level={3} className="video__title">
@@ -87,6 +96,7 @@ const VideoDetails: FC = (): ReactElement => {
                 isOpen={modalOpen}
                 title={title}
                 id={id}
+                source={source}
             />
             <Footer />
         </>
