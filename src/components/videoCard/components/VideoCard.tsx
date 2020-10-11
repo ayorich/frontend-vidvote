@@ -13,10 +13,15 @@ const VideoCard: FC<videoCardProps> = ({
     votes,
     time,
     votedTab,
+    picture
 }): ReactElement => {
     const { push } = useHistory();
     const id = source.split('/')[4];
     const videoPlayerHandler = () => {
+        if (picture) {
+            console.log('picture')
+            return push(`${VIDEODETAILS}?source=${source}&title=${title}`);
+        }
         push(`${VIDEODETAILS}?id=${id}&title=${title}`);
     };
     return (
@@ -37,18 +42,24 @@ const VideoCard: FC<videoCardProps> = ({
                             <StarFilled className="videoCard__icon" /> {votes}{' '}
                             votes
                         </span>
-                        <Divider
-                            type="vertical"
-                            className="videoCard__divider"
-                        />
-                        <span className="videoCard__mins">
-                            <FieldTimeOutlined className="videoCard__icon" />{' '}
-                            {time} mins
+                        {time ?
+                            <>
+                                <Divider
+                                    type="vertical"
+                                    className="videoCard__divider"
+                                />
+                                <span className="videoCard__mins">
+                                    <FieldTimeOutlined className="videoCard__icon" />{' '}
+                                    {time} mins
                         </span>
+                            </>
+                            :
+                            null
+                        }
                     </>
                 ) : (
-                    <Tag color="geekblue">VOTED</Tag>
-                )}
+                        <Tag color="geekblue">VOTED</Tag>
+                    )}
             </div>
         </Card>
     );

@@ -50,15 +50,16 @@ const MyVideos: FC = (): ReactElement => {
 
     //----localstorage---//
 
-    const displayCard = videoData?.map(({ name, urlID }, i) => (
+    const displayCard = videoData?.map(({ name, urlID, source }, i) => (
         <Col xs={24} md={8} key={i}>
             <VideoCard
                 key={i}
-                source={`https://img.youtube.com/vi/${urlID}/mqdefault.jpg`}
+                source={source ? source : `https://img.youtube.com/vi/${urlID}/mqdefault.jpg`}
                 title={name}
                 votes="27"
                 time="12"
                 votedTab
+                picture={source ? true : false}
             />
         </Col>
     ));
@@ -79,14 +80,14 @@ const MyVideos: FC = (): ReactElement => {
             {!loading && videoData ? (
                 <Row className="landing__video2">{displayCard}</Row>
             ) : (
-                <Row
-                    style={{ height: '400px' }}
-                    justify="center"
-                    align="middle"
-                >
-                    {loading && <Spin indicator={indicator} />}
-                </Row>
-            )}
+                    <Row
+                        style={{ height: '400px' }}
+                        justify="center"
+                        align="middle"
+                    >
+                        {loading && <Spin indicator={indicator} />}
+                    </Row>
+                )}
             <Footer />
         </>
     );

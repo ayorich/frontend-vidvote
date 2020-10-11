@@ -6,11 +6,11 @@ import React, {
     useEffect,
     useState,
 } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { auth, AuthContext } from '../../../firebase';
 import { DASHBOARD, HOME, SIGNIN, SIGNUP, VIDEODETAILS } from '../../../routes';
 import { useWindowWidth } from '@react-hook/window-size';
-import logoImage from '../../../assets/logo.png';
+import logoImage from '../../../assets/logo.jpeg';
 import { MenuUnfoldOutlined } from '@ant-design/icons';
 import MenuModal from './MenuModal';
 
@@ -69,9 +69,12 @@ const Navigation: FC = (): ReactElement => {
                     className="menu"
                 >
                     {/* <div className="logo" /> */}
-                    <div className="menu__logo">
-                        <img src={logoImage} alt="profile" />
-                    </div>
+                    <Link to="/">
+
+                        <div className="menu__logo">
+                            <img src={logoImage} alt="profile" />
+                        </div>
+                    </Link>
                     <Menu.Item key={HOME}>Home</Menu.Item>
                     {pathname === VIDEODETAILS && (
                         <Menu.Item key={VIDEODETAILS}>Video Player</Menu.Item>
@@ -90,25 +93,25 @@ const Navigation: FC = (): ReactElement => {
                             </Menu.Item>
                         </>
                     ) : (
-                        <Menu.Item
-                            onClick={onSignOut}
-                            key="SIGNOUT"
-                            className="btnItems"
-                        >
-                            <Button>Log Out</Button>
-                        </Menu.Item>
-                    )}
+                            <Menu.Item
+                                onClick={onSignOut}
+                                key="SIGNOUT"
+                                className="btnItems"
+                            >
+                                <Button>Log Out</Button>
+                            </Menu.Item>
+                        )}
                 </Menu>
             ) : (
-                <Row justify="end">
-                    <Col>
-                        <MenuUnfoldOutlined
-                            onClick={onToggle}
-                            className="hamburger-menu"
-                        />
-                    </Col>
-                </Row>
-            )}
+                    <Row justify="end">
+                        <Col>
+                            <MenuUnfoldOutlined
+                                onClick={onToggle}
+                                className="hamburger-menu"
+                            />
+                        </Col>
+                    </Row>
+                )}
             <MenuModal
                 isOpen={showMenu}
                 onActionComplete={onToggle}
